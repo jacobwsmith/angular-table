@@ -1,0 +1,16 @@
+<div class="table-nav-item">
+    <div class="table-search">
+        <img 
+        	class="table-search-close" 
+        	src="/img/icon-search-close.png" 
+        	ng-click="nlTableSearch.close()" 
+        	ng-class="nlTableSearch.closeBtn"
+        >
+        <!-- ng-class="{test: obj.value1 == 'someothervalue'}" -->
+        <input type="text" 
+        	class="form-control input-xs" 
+        	ng-model="nlTableSearch.text"
+            ng-class="{'table-search-input-on': nlTableSearch.closeBtn}"
+        >
+    </div>
+</div>

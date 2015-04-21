@@ -1,0 +1,21 @@
+<div class="table-nav-item table-pager-rows" ng-class="nlTablePager.disablePager() && 'disabled'">
+    <form role="form" class="form-inline">
+        <div class="form-group">
+            <label>Rows:
+                <select ng-model="nlTablePager.rowsPerPage" ng-change="nlTablePager.setPage(0);nlTablePager.setRowsPerPage(5);" ng-disabled="nlTablePager.disablePager()" class="form-control input-xs">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </label>
+        </div>
+    </form>
+</div>
+<div class="table-nav-item" ng-class="nlTablePager.disablePager() && 'disabled'">
+    <span class="table-pager-display">Page {{nlTablePager.page+1}} of {{nlTablePager.pageCount()}}</span>
+</div>
+<div class="table-nav-item" ng-class="nlTablePager.disablePager() && 'disabled'">
+    <span ng-class="nlTablePager.isFirstPage() && 'table-pager-prev-off' || 'table-pager-prev'" ng-click="nlTablePager.perviousPage()"></span>
+    <span ng-class="nlTablePager.isLastPage() && 'table-pager-next-off' || 'table-pager-next'" ng-click="nlTablePager.nextPage()"></span>
+</div>

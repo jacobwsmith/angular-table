@@ -1,0 +1,87 @@
+<html>
+<head>
+	<title>Table Example</title>
+	
+	<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+	<link href="/css/type.css" rel="stylesheet">
+	<link href="/css/grid.css" rel="stylesheet">
+	<link href="/css/tables.css" rel="stylesheet">
+	<link href="/css/helpers.css" rel="stylesheet">
+	<link href="/css/forms.css" rel="stylesheet">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<script src="/directives/nl-table-pager/nl-table-pager.js"></script>
+	<script src="/directives/nl-table-search/nl-table-search.js"></script>
+	<script src="/directives/nl-table-sorter/nl-table-sorter.js"></script>
+	<script src="/app.js"></script>
+
+</head>
+<body ng-app="app">
+	<div class="container-fluid"
+		ng-controller="AppCtrl as vm"
+	>
+		<div class="row">
+			<div class="col-12" >
+				
+				<h1>Table Example</h1>
+				<p>Several Angularjs directives to add search, sorting and pagination to your existing tables</p>
+				
+				<section class="group box" ng-show="vm.loaded">
+                    <div class="group-row">
+                        <div class="table-nav">
+
+                        	<!-- Table Search -->
+                			<nl-table-search></nl-table-search>
+                            
+                            <!-- Table Pager -->
+                			<nl-table-pager></nl-table-pager>
+
+                        </div>
+                    </div>
+                    <div class="group-row">
+                        <table class="table table-index">
+							<thead>
+								<tr>
+									<th></th>
+									<th nl-table-sorter order="'name'" by="vm.order" reverse="vm.reverse">Name</th>
+									<th nl-table-sorter order="'type'" by="vm.order" reverse="vm.reverse">Type</th>
+									<th nl-table-sorter order="'status'" by="vm.order" reverse="vm.reverse">Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in vm.list | orderBy:vm.order:vm.reverse | filter:nlTableSearch.value | nlTablePagerFilter: nlTablePager.rowsPerPage">
+									<td>{{$index + 1 + (nlTablePager.rowsPerPage * nlTablePager.page)}}.</td>
+									<td>{{item.name}}</td>
+									<td>{{item.type}}</td>
+									<td>{{item.status}}</td>
+								</tr>
+								
+								<!-- No Search Results -->
+			                    <tr ng-show="nlTableSearch.value !=='' &&  (vm.list | filter:nlTableSearch.value).length == 0">
+			                        <td colspan="4">
+			                            <div class="table-no-records">
+			                                There are no records for this search
+			                            </div>
+			                        </td>
+			                    </tr>
+
+							</tbody>
+						</table>
+                    </div>
+                    <div class="group-row">
+                        <div class="table-nav">
+                            <div class="table-nav">
+                                
+                                <!-- Table Pager -->
+                				<nl-table-pager></nl-table-pager>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
